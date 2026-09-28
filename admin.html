@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KUPER — Администрирование</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <header class="site-header admin-header"><div class="header-inner"><a class="logo" href="index.html">KUPER</a><nav class="nav-desktop"><a href="index.html">← В каталог</a></nav><div class="header-end"><span class="mono-tag">Admin / Console</span></div></div></header>
+  <main class="admin-main">
+    <section class="admin-login" id="adminLogin"><p class="mono-tag">Restricted access</p><h1>Админ<br>панель</h1><p>Войдите под учётной записью администратора, чтобы управлять каталогом.</p><form id="adminLoginForm"><input class="form-input" id="adminEmail" type="email" placeholder="E-mail" required><input class="form-input" id="adminPassword" type="password" placeholder="Пароль" required><button class="btn" type="submit">Войти</button></form><p class="admin-error" id="adminError"></p></section>
+    <section class="admin-dashboard" id="adminDashboard" hidden>
+      <div class="admin-top"><div><p class="mono-tag">Catalog control</p><h1>Товары</h1></div><button class="btn-outline" id="adminLogout">Выйти</button></div>
+      <div class="admin-toolbar"><input class="form-input" id="adminSearch" type="search" placeholder="Поиск товара: название, категория, описание"><span class="mono-tag" id="productCount"></span></div>
+      <div class="admin-grid"><section class="admin-products"><div id="adminProductList"></div></section><section class="admin-form-wrap"><h2>Добавить товар</h2><form id="productForm"><input class="form-input" id="newName" placeholder="Название товара" required><select class="form-input" id="newCategory"><option value="smart">Smart Home</option><option value="kitchen">Кухня</option><option value="cleaning">Уборка</option></select><input class="form-input" id="newPrice" type="number" min="0" placeholder="Цена, ₸" required><input class="form-input" id="newOldPrice" type="number" min="0" placeholder="Старая цена, ₸ (необязательно)"><input class="form-input" id="newImage" type="url" placeholder="Ссылка на фото (необязательно)"><input class="form-input" id="newBadge" maxlength="20" placeholder="Метка: NEW, SALE (необязательно)"><textarea class="form-input" id="newDescription" rows="3" placeholder="Описание"></textarea><textarea class="form-input" id="newSpecs" rows="5" placeholder="Характеристики:&#10;Цвет: Чёрный&#10;Мощность: 100 Вт"></textarea><button class="btn btn-full" type="submit">Добавить товар</button></form><p class="admin-error" id="productMessage"></p></section></div>
+    </section>
+  </main><script src="admin.js"></script>
+</body></html>

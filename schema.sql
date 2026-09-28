@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS users (
+  id BIGSERIAL PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL,
+  is_admin BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS products (
+  id BIGSERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  price INTEGER NOT NULL CHECK (price >= 0),
+  old_price INTEGER,
+  image TEXT,
+  badge VARCHAR(40),
+  description TEXT,
+  specs JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  total INTEGER NOT NULL CHECK (total >= 0),
+  payment_method VARCHAR(60),
+  status VARCHAR(40) NOT NULL DEFAULT 'Новый',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id BIGSERIAL PRIMARY KEY,
+  order_id BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id BIGINT REFERENCES products(id) ON DELETE SET NULL,
+  product_name VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity > 0)
+);
